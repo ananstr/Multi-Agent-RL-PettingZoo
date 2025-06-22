@@ -1,0 +1,97 @@
+Using cuda device
+[34m[1mwandb[0m: [33mWARNING[0m When using several event log directories, please call `wandb.tensorboard.patch(root_logdir="...")` before `wandb.init`
+Logging to ./ppo_marl_tb/PPO_16
+---------------------------------
+| rollout/           |          |
+|    ep_len_mean     | 101      |
+|    ep_rew_mean     | -137     |
+| time/              |          |
+|    fps             | 1110     |
+|    iterations      | 1        |
+|    time_elapsed    | 5        |
+|    total_timesteps | 6144     |
+---------------------------------
+-----------------------------------------
+| rollout/                |             |
+|    ep_len_mean          | 101         |
+|    ep_rew_mean          | -131        |
+| time/                   |             |
+|    fps                  | 734         |
+|    iterations           | 2           |
+|    time_elapsed         | 16          |
+|    total_timesteps      | 12288       |
+| train/                  |             |
+|    approx_kl            | 0.005949676 |
+|    clip_fraction        | 0.0345      |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -1.61       |
+|    explained_variance   | 0.00794     |
+|    learning_rate        | 0.0003      |
+|    loss                 | 25.2        |
+|    n_updates            | 10          |
+|    policy_gradient_loss | -0.00697    |
+|    value_loss           | 126         |
+-----------------------------------------
+------------------------------------------
+| rollout/                |              |
+|    ep_len_mean          | 101          |
+|    ep_rew_mean          | -121         |
+| time/                   |              |
+|    fps                  | 663          |
+|    iterations           | 3            |
+|    time_elapsed         | 27           |
+|    total_timesteps      | 18432        |
+| train/                  |              |
+|    approx_kl            | 0.0046366225 |
+|    clip_fraction        | 0.0233       |
+|    clip_range           | 0.2          |
+|    entropy_loss         | -1.6         |
+|    explained_variance   | -0.0494      |
+|    learning_rate        | 0.0003       |
+|    loss                 | 43.4         |
+|    n_updates            | 20           |
+|    policy_gradient_loss | -0.00629     |
+|    value_loss           | 99.5         |
+------------------------------------------
+-----------------------------------------
+| rollout/                |             |
+|    ep_len_mean          | 101         |
+|    ep_rew_mean          | -109        |
+| time/                   |             |
+|    fps                  | 632         |
+|    iterations           | 4           |
+|    time_elapsed         | 38          |
+|    total_timesteps      | 24576       |
+| train/                  |             |
+|    approx_kl            | 0.005876389 |
+|    clip_fraction        | 0.038       |
+|    clip_range           | 0.2         |
+|    entropy_loss         | -1.59       |
+|    explained_variance   | 0.0316      |
+|    learning_rate        | 0.0003      |
+|    loss                 | 39.6        |
+|    n_updates            | 30          |
+|    policy_gradient_loss | -0.00712    |
+|    value_loss           | 122         |
+-----------------------------------------
+------------------------------------------
+| rollout/                |              |
+|    ep_len_mean          | 101          |
+|    ep_rew_mean          | -102         |
+| time/                   |              |
+|    fps                  | 617          |
+|    iterations           | 5            |
+|    time_elapsed         | 49           |
+|    total_timesteps      | 30720        |
+| train/                  |              |
+|    approx_kl            | 0.0059607252 |
+|    clip_fraction        | 0.036        |
+|    clip_range           | 0.2          |
+|    entropy_loss         | -1.58        |
+|    explained_variance   | 0.0967       |
+|    learning_rate        | 0.0003       |
+|    loss                 | 77.3         |
+|    n_updates            | 40           |
+|    policy_gradient_loss | -0.00708     |
+|    value_loss           | 137          |
+------------------------------------------

@@ -1,0 +1,21 @@
+{"time":"2025-06-22T15:47:09.5952511+02:00","level":"INFO","msg":"stream: starting","core version":"0.20.1","symlink path":"c:\\Users\\matia\\OneDrive\\Escritorio\\Nastia_BSE\\RL\\wandb\\run-20250622_154708-kvepu9qg\\logs\\debug-core.log"}
+{"time":"2025-06-22T15:47:09.98245+02:00","level":"INFO","msg":"stream: created new stream","id":"kvepu9qg"}
+{"time":"2025-06-22T15:47:09.98245+02:00","level":"INFO","msg":"stream: started","id":"kvepu9qg"}
+{"time":"2025-06-22T15:47:09.98245+02:00","level":"INFO","msg":"handler: started","stream_id":"kvepu9qg"}
+{"time":"2025-06-22T15:47:09.98245+02:00","level":"INFO","msg":"sender: started","stream_id":"kvepu9qg"}
+{"time":"2025-06-22T15:47:09.9830908+02:00","level":"INFO","msg":"writer: Do: started","stream_id":"kvepu9qg"}
+{"time":"2025-06-22T15:47:10.2817666+02:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-06-22T15:47:17.7023148+02:00","level":"INFO","msg":"Pausing system monitor"}
+{"time":"2025-06-22T15:47:31.6256381+02:00","level":"WARN","msg":"tensorboard: no root directory","error":"timed out after 10s"}
+{"time":"2025-06-22T15:47:31.6256381+02:00","level":"INFO","msg":"tensorboard: tracking new log directory","rootDir":{},"logDir":"LocalOrCloudPath(LocalPath=\"c:\\\\Users\\\\matia\\\\OneDrive\\\\Escritorio\\\\Nastia_BSE\\\\RL\\\\ppo_marl_tb\\\\PPO_15\")","namespace":""}
+{"time":"2025-06-22T15:47:31.6262865+02:00","level":"INFO","msg":"tensorboard: saving file","fileLocation":"c:\\Users\\matia\\OneDrive\\Escritorio\\Nastia_BSE\\RL\\ppo_marl_tb\\PPO_15\\events.out.tfevents.1750600041.BORRELL-LAPTOP.21628.0","runPath":"ppo_marl_tb/PPO_15/events.out.tfevents.1750600041.BORRELL-LAPTOP.21628.0"}
+{"time":"2025-06-22T15:47:31.6284034+02:00","level":"ERROR","msg":"tensorboard: error creating symlink","target":"c:\\Users\\matia\\OneDrive\\Escritorio\\Nastia_BSE\\RL\\ppo_marl_tb\\PPO_15\\events.out.tfevents.1750600041.BORRELL-LAPTOP.21628.0","symlink":"c:\\Users\\matia\\OneDrive\\Escritorio\\Nastia_BSE\\RL\\wandb\\run-20250622_154708-kvepu9qg\\files\\ppo_marl_tb\\PPO_15\\events.out.tfevents.1750600041.BORRELL-LAPTOP.21628.0","error":"symlink c:\\Users\\matia\\OneDrive\\Escritorio\\Nastia_BSE\\RL\\ppo_marl_tb\\PPO_15\\events.out.tfevents.1750600041.BORRELL-LAPTOP.21628.0 c:\\Users\\matia\\OneDrive\\Escritorio\\Nastia_BSE\\RL\\wandb\\run-20250622_154708-kvepu9qg\\files\\ppo_marl_tb\\PPO_15\\events.out.tfevents.1750600041.BORRELL-LAPTOP.21628.0: A required privilege is not held by the client."}
+{"time":"2025-06-22T15:49:55.8907894+02:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-06-22T15:49:55.8907894+02:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-06-22T15:49:56.4793776+02:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-06-22T15:49:56.6852754+02:00","level":"INFO","msg":"handler: operation stats","stats":{}}
+{"time":"2025-06-22T15:49:56.6965541+02:00","level":"INFO","msg":"stream: closing","id":"kvepu9qg"}
+{"time":"2025-06-22T15:49:56.6965541+02:00","level":"INFO","msg":"handler: closed","stream_id":"kvepu9qg"}
+{"time":"2025-06-22T15:49:56.6965541+02:00","level":"INFO","msg":"writer: Close: closed","stream_id":"kvepu9qg"}
+{"time":"2025-06-22T15:49:56.6965541+02:00","level":"INFO","msg":"sender: closed","stream_id":"kvepu9qg"}
+{"time":"2025-06-22T15:49:56.6970574+02:00","level":"INFO","msg":"stream: closed","id":"kvepu9qg"}
