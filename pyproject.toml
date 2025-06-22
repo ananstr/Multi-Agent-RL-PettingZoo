@@ -1,0 +1,40 @@
+[project]
+name = "rl"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+
+dependencies = [
+    # --- PyTorch and related libraries ---
+    # Pin to a stable PyTorch 2.x version that has cu121 wheels for Python 3.10
+    "torch>=2.2.0,<2.3.0", # PyTorch 2.2.x is stable with Python 3.10 and has cu121 builds
+    "torchvision>=0.17.0,<0.18.0", # Corresponding torchvision for 2.2.x
+    "torchaudio>=2.2.0,<2.3.0", # Corresponding torchaudio for 2.2.x
+    # --- Other Libraries ---
+    "numpy>=1.26.0,<2.0.0", # Ensure a recent numpy
+    "ruff", # Code formatter/linter
+    "matplotlib", # Plotting
+    "scikit-learn",
+    "tqdm>=4.67.1",
+    "pandas>=2.3.0",
+    "pettingzoo[mpe]>=1.25.0",
+    "gymnasium>=1.1.1",
+    "supersuit>=3.10.0",
+    "wandb>=0.20.1",
+    "ipykernel>=6.29.5",
+    "mpe2>=0.0.1",
+    "tensorboard>=2.19.0",
+    "nbformat>=5.10.4",
+]
+
+[tool.uv]
+[[tool.uv.index]]
+name = "pytorch-cuda"
+url = "https://download.pytorch.org/whl/cu121"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cuda" }
+torchvision = { index = "pytorch-cuda" }
+torchaudio = { index = "pytorch-cuda" }
