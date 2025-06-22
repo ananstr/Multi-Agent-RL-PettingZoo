@@ -1,0 +1,217 @@
+Testing trained agents...
+Testing trained agents...
+Episode finished at step 25
+Testing trained agents...
+Average Episode Reward: -183.06 ± 68.59
+Average Episode Length: 100.00 ± 0.00
+Best Episode Reward: -106.01
+Worst Episode Reward: -326.38
+Found 2 TensorBoard event files
+Reading from: ./ppo_marl_tb\PPO_14\events.out.tfevents.1750597070.BORRELL-LAPTOP.29292.1
+Available metrics: ['rollout/ep_len_mean', 'rollout/ep_rew_mean', 'time/fps', 'train/approx_kl', 'train/clip_fraction', 'train/clip_range', 'train/entropy_loss', 'train/explained_variance', 'train/learning_rate', 'train/loss', 'train/policy_gradient_loss', 'train/value_loss']
+Animation saved as 'training_metrics_animation.gif'
+Agent behavior animation saved as 'agent_behavior_evolution.gif'
+Creating comprehensive training dashboard animation...
+Could not save dashboard animation: local variable 'target' referenced before assignment
+Creating comprehensive training dashboard animation...
+Dashboard animation saved as 'training_dashboard.gif'
+Reading TensorBoard logs from: ./ppo_marl_tb\PPO_14\events.out.tfevents.1750597070.BORRELL-LAPTOP.29292.1
+File size: 8495 bytes
+
+Available data types:
+  images: 0 items
+  audio: 0 items
+  histograms: 0 items
+  scalars: 12 items
+  distributions: 0 items
+  tensors: 0 items
+Error inspecting logs: object of type 'bool' has no len()
+Reading TensorBoard logs from: ./ppo_marl_tb\PPO_14\events.out.tfevents.1750597070.BORRELL-LAPTOP.29292.1
+File size: 8495 bytes
+
+Available data types:
+  images: 0 items
+  audio: 0 items
+  histograms: 0 items
+  scalars: 12 items
+  distributions: 0 items
+  tensors: 0 items
+  graph: False
+  meta_graph: False
+  run_metadata: 0 items
+
+Scalar metrics (12 total):
+   1. rollout/ep_len_mean
+      Data points: 13
+      Step range: 4096 to 53248
+      Value range: 26.0000 to 26.0000
+
+   2. rollout/ep_rew_mean
+      Data points: 13
+      Step range: 4096 to 53248
+      Value range: -22.1592 to -18.5061
+
+   3. time/fps
+      Data points: 13
+      Step range: 4096 to 53248
+      Value range: 479.0000 to 770.0000
+
+   4. train/approx_kl
+      Data points: 12
+      Step range: 8192 to 53248
+      Value range: 0.0047 to 0.0090
+
+   5. train/clip_fraction
+      Data points: 12
+      Step range: 8192 to 53248
+      Value range: 0.0236 to 0.0703
+
+   6. train/clip_range
+      Data points: 12
+      Step range: 8192 to 53248
+      Value range: 0.2000 to 0.2000
+
+   7. train/entropy_loss
+      Data points: 12
+      Step range: 8192 to 53248
+      Value range: -1.6061 to -1.4978
+
+   8. train/explained_variance
+      Data points: 12
+      Step range: 8192 to 53248
+      Value range: -0.0228 to 0.3887
+
+   9. train/learning_rate
+      Data points: 12
+      Step range: 8192 to 53248
+      Value range: 0.0003 to 0.0003
+
+  10. train/loss
+      Data points: 12
+      Step range: 8192 to 53248
+      Value range: 6.7729 to 18.1526
+
+  11. train/policy_gradient_loss
+      Data points: 12
+      Step range: 8192 to 53248
+      Value range: -0.0112 to -0.0056
+
+  12. train/value_loss
+      Data points: 12
+      Step range: 8192 to 53248
+      Value range: 17.4051 to 35.4572
+
+Entropy-related metrics found: ['train/entropy_loss']
+
+Common PPO metrics found:
+  policy_loss: []
+  value_loss: ['train/value_loss']
+  entropy: ['train/entropy_loss']
+  reward: []
+  approx_kl: ['train/approx_kl']
+  clip_fraction: ['train/clip_fraction']
+Reading TensorBoard logs from: ./ppo_marl_tb\PPO_14\events.out.tfevents.1750597070.BORRELL-LAPTOP.29292.1
+File size: 8495 bytes
+
+Available data types:
+  images: 0 items
+  audio: 0 items
+  histograms: 0 items
+  scalars: 12 items
+  distributions: 0 items
+  tensors: 0 items
+  graph: False
+  meta_graph: False
+  run_metadata: 0 items
+
+Scalar metrics (12 total):
+   1. rollout/ep_len_mean
+      Data points: 13
+      Step range: 4096 to 53248
+      Value range: 26.0000 to 26.0000
+
+   2. rollout/ep_rew_mean
+      Data points: 13
+      Step range: 4096 to 53248
+      Value range: -22.1592 to -18.5061
+
+   3. time/fps
+      Data points: 13
+      Step range: 4096 to 53248
+      Value range: 479.0000 to 770.0000
+
+   4. train/approx_kl
+      Data points: 12
+      Step range: 8192 to 53248
+      Value range: 0.0047 to 0.0090
+
+   5. train/clip_fraction
+      Data points: 12
+      Step range: 8192 to 53248
+      Value range: 0.0236 to 0.0703
+
+   6. train/clip_range
+      Data points: 12
+      Step range: 8192 to 53248
+      Value range: 0.2000 to 0.2000
+
+   7. train/entropy_loss
+      Data points: 12
+      Step range: 8192 to 53248
+      Value range: -1.6061 to -1.4978
+
+   8. train/explained_variance
+      Data points: 12
+      Step range: 8192 to 53248
+      Value range: -0.0228 to 0.3887
+
+   9. train/learning_rate
+      Data points: 12
+      Step range: 8192 to 53248
+      Value range: 0.0003 to 0.0003
+
+  10. train/loss
+      Data points: 12
+      Step range: 8192 to 53248
+      Value range: 6.7729 to 18.1526
+
+  11. train/policy_gradient_loss
+      Data points: 12
+      Step range: 8192 to 53248
+      Value range: -0.0112 to -0.0056
+
+  12. train/value_loss
+      Data points: 12
+      Step range: 8192 to 53248
+      Value range: 17.4051 to 35.4572
+
+Entropy-related metrics found: ['train/entropy_loss']
+
+Common PPO metrics found:
+  policy_loss: []
+  value_loss: ['train/value_loss']
+  entropy: ['train/entropy_loss']
+  reward: []
+  approx_kl: ['train/approx_kl']
+  clip_fraction: ['train/clip_fraction']
+Found 2 TensorBoard event files
+Reading from: ./ppo_marl_tb\PPO_14\events.out.tfevents.1750597070.BORRELL-LAPTOP.29292.1
+Available metrics: ['rollout/ep_len_mean', 'rollout/ep_rew_mean', 'time/fps', 'train/approx_kl', 'train/clip_fraction', 'train/clip_range', 'train/entropy_loss', 'train/explained_variance', 'train/learning_rate', 'train/loss', 'train/policy_gradient_loss', 'train/value_loss']
+
+Detailed metric analysis:
+rollout/ep_len_mean: 13 data points, range: 26.0 to 26.0
+rollout/ep_rew_mean: 13 data points, range: -22.159191131591797 to -18.506067276000977
+time/fps: 13 data points, range: 479.0 to 770.0
+train/approx_kl: 12 data points, range: 0.004656600765883923 to 0.009001001715660095
+train/clip_fraction: 12 data points, range: 0.02358398400247097 to 0.0703125
+train/clip_range: 12 data points, range: 0.20000000298023224 to 0.20000000298023224
+train/entropy_loss: 12 data points, range: -1.6061184406280518 to -1.497773289680481
+train/explained_variance: 12 data points, range: -0.02278423309326172 to 0.38871729373931885
+train/learning_rate: 12 data points, range: 0.0003000000142492354 to 0.0003000000142492354
+train/loss: 12 data points, range: 6.772882461547852 to 18.15255355834961
+train/policy_gradient_loss: 12 data points, range: -0.011235236190259457 to -0.005584406666457653
+train/value_loss: 12 data points, range: 17.405101776123047 to 35.457176208496094
+
+Selected metrics for animation: ['train/approx_kl', 'train/clip_fraction', 'train/entropy_loss', 'train/loss', 'train/policy_gradient_loss', 'train/value_loss']
+Animating metrics: ['train/value_loss', 'train/entropy_loss', 'train/approx_kl', 'train/clip_fraction']
+Animation saved as 'training_metrics_animation.gif'

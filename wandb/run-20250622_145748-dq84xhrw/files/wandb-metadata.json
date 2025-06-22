@@ -1,0 +1,43 @@
+{
+  "os":  "Windows-10-10.0.26100-SP0",
+  "python":  "CPython 3.10.18",
+  "startedAt":  "2025-06-22T12:57:48.218079Z",
+  "program":  "c:\\Users\\matia\\OneDrive\\Escritorio\\Nastia_BSE\\RL\\MARL_final_project.ipynb",
+  "codePath":  "MARL_final_project.ipynb",
+  "git":  {
+    "remote":  "https://github.com/ananstr/RL.git",
+    "commit":  "afef1edb0781946aa5d222aa2f90ebfae2b0c418"
+  },
+  "email":  "anastasiia.chernavskaia@bse.eu",
+  "root":  "c:\\Users\\matia\\OneDrive\\Escritorio\\Nastia_BSE\\RL",
+  "host":  "BORRELL-LAPTOP",
+  "executable":  "c:\\Users\\matia\\OneDrive\\Escritorio\\Nastia_BSE\\RL\\.venv\\Scripts\\python.exe",
+  "codePathLocal":  "MARL_final_project.ipynb",
+  "cpu_count":  12,
+  "cpu_count_logical":  16,
+  "gpu":  "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "gpu_count":  1,
+  "disk":  {
+    "/":  {
+      "total":  "1021821579264",
+      "used":  "557325979648"
+    }
+  },
+  "memory":  {
+    "total":  "16890519552"
+  },
+  "cpu":  {
+    "count":  12,
+    "countLogical":  16
+  },
+  "gpu_nvidia":  [
+    {
+      "name":  "NVIDIA GeForce RTX 4060 Laptop GPU",
+      "memoryTotal":  "8585740288",
+      "cudaCores":  3072,
+      "architecture":  "Ada",
+      "uuid":  "GPU-d960278c-e418-fdea-5643-2a133fd6bf97"
+    }
+  ],
+  "cudaVersion":  "12.9"
+}

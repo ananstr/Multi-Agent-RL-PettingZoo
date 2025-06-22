@@ -8,9 +8,9 @@ requires-python = ">=3.10"
 dependencies = [
     # --- PyTorch and related libraries ---
     # Pin to a stable PyTorch 2.x version that has cu121 wheels for Python 3.10
-    "torch>=2.2.0,<2.3.0", # PyTorch 2.2.x is stable with Python 3.10 and has cu121 builds
-    "torchvision>=0.17.0,<0.18.0", # Corresponding torchvision for 2.2.x
-    "torchaudio>=2.2.0,<2.3.0", # Corresponding torchaudio for 2.2.x
+    "torch>=2.3.0,<2.4.0",
+    "torchvision>=0.18.0,<0.19.0",
+    "torchaudio>=2.3.0,<2.4.0",
     # --- Other Libraries ---
     "numpy>=1.26.0,<2.0.0", # Ensure a recent numpy
     "ruff", # Code formatter/linter
@@ -26,6 +26,7 @@ dependencies = [
     "mpe2>=0.0.1",
     "tensorboard>=2.19.0",
     "nbformat>=5.10.4",
+    "stable-baselines3>=2.6.0",
 ]
 
 [tool.uv]
