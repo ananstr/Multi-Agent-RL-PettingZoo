@@ -1,0 +1,76 @@
+\section{Introduction}
+
+Multi-agent reinforcement learning (MARL) in competitive resource environments presents unique challenges where agents must simultaneously learn optimal policies while adapting to the evolving strategies of competing agents. Unlike purely cooperative or zero-sum scenarios, resource competition introduces complex dynamics where agents compete for scarce resources while potentially benefiting from limited cooperation~\autocite{lowe_multi-agent_2017}. 
+
+The significance of this domain extends beyond theoretical interest to practical applications in cloud computing, wireless networks, autonomous vehicles, and financial markets, where multiple autonomous entities must efficiently allocate limited resources while pursuing individual objectives~\autocite{wang_qplex_2021, allahham_multi-agent_2022}. These environments exhibit fundamental properties that distinguish them from single-agent learning: non-stationarity from each agent's perspective, scalability challenges with increasing agent populations, and emergent behaviors that arise from competitive interactions~\autocite{hernandez-leal_survey_2019, ning_survey_2024}.
+
+\section{Foundational Frameworks and Algorithmic Approaches}
+
+\subsection{MADDPG and Centralized Training with Decentralized Execution}
+
+The seminal work by \textcite{lowe_multi-agent_2017} introduced Multi-Agent Deep Deterministic Policy Gradient (MADDPG), establishing a foundational framework for learning in mixed cooperative-competitive environments. MADDPG addresses the fundamental challenge of non-stationarity by employing centralized training with decentralized execution (CTDE), where agents use centralized critics during training that have access to all agents' observations and actions, while maintaining decentralized policies for execution.
+
+The algorithm extends single-agent DDPG to multi-agent settings through a key innovation: each agent $i$ maintains its own actor network $\mu_i(o_i|\theta_i)$ but uses a centralized critic $Q_i^\mu(x, a_1, \ldots, a_N)$ where $x$ represents the global state and $a_1, \ldots, a_N$ are all agents' actions. The policy gradient for agent $i$ becomes:
+\begin{equation}
+    \nabla_{\theta_i} J(\mu_i) = \mathbb{E}[\nabla_{\theta_i} \mu_i(o_i) \nabla_{a_i} Q_i^\mu(x, a_1, \ldots, a_N)|_{a_i=\mu_i(o_i)}]
+\end{equation}
+
+This approach demonstrates superior performance compared to independent learning approaches in environments featuring resource competition, such as the "simple tag" scenario, where agents compete to reach specific locations while avoiding adversaries (cf. our replication here). The OpenAI experiments revealed critical insights about how resource availability affects agent behavior and learning dynamics, establishing that multi-agent environments possess inherent curriculum properties where increasing agent capabilities create correspondingly more challenging environments~\autocite{lowe_learning_2017}.
+
+\subsection{Value Decomposition and Policy Gradient Methods}
+
+For competitive resource allocation, value decomposition methods address the credit assignment problem while maintaining competitive dynamics. QMIX~\autocite{rashid_monotonic_2020} and its variants enable agents to learn joint action-value functions through monotonic mixing networks, ensuring that individual Q-value maximization leads to optimal joint actions in cooperative sub-tasks while maintaining competitive behavior where appropriate. Recent advances include QPLEX~\autocite{wang_qplex_2021}, which introduces a duplex dueling architecture for Q-function decomposition, and Weighted QMIX, which breaks monotonicity limitations to handle more complex competitive interactions.
+
+Furthermore, multi-Agent Proximal Policy Optimization (MAPPO)~\autocite{yu_surprising_2022} has demonstrated surprising effectiveness in competitive environments despite its conceptual simplicity, with success stemming from the proper implementation of centralized value functions rather than algorithmic complexity. Counterfactual Multi-Agent Policy Gradients (COMA)~\autocite{foerster_counterfactual_2018} addresses credit assignment in competitive settings through counterfactual baselines that measure individual agent contributions while marginalizing out other agents' actions.
+
+\section{Sequential Social Dilemmas and Emergent Complexity}
+
+\subsection{Temporal Resource Competition}
+
+\textcite{leibo_multi-agent_2017} extended the traditional matrix game framework to sequential social dilemmas (SSDs), recognizing that real-world resource competition involves temporally extended decisions rather than single-shot actions. Their work introduced paradigmatic environments that capture essential aspects of resource competition, including the Fruit Gathering Game where agents navigate spatial environments to collect finite fruit resources, and the Wolfpack Hunting Game that models predator coordination balancing individual reward maximization with collective hunting benefits.
+
+The SSD framework reveals how environmental factors, particularly resource abundance, fundamentally shape learned behaviors. When resources are plentiful, agents pursue individual strategies with minimal interference. As scarcity increases, emergent phenomena occur including territorial establishment and defense, sophisticated temporal strategies for resource acquisition, and adaptive counter-strategies in response to opponents' evolving policies. These findings demonstrate that cooperativeness is a property of policies rather than elementary actions, requiring agents to learn complex behavioral patterns balancing immediate rewards with long-term strategic positioning.
+
+\subsection{Autocurricula and Behavioral Complexity}
+
+\textcite{bansal_emergent_2018} demonstrated that competitive multi-agent environments trained with self-play can produce behaviors far more complex than the environment itself. Their work in 3D physics-based competitive environments shows that agents develop sophisticated skills including running, blocking, tackling, and strategic deception through purely competitive pressure. The concept of autocurricula emerges as a critical feature where agents' performance improvements effectively modify the learning environment for all participants, creating stacked layers of learning where each behavioral innovation provides the foundation for the next complexity level.
+
+This research identifies several mechanisms through which competitive pressure generates behavioral complexity: arms race dynamics creating continuous pressure for counter-strategy development, natural curriculum adjustment matching challenge levels to agent capabilities, skill transfer from competitive contexts to related tasks, and emergent tool use where agents discover and exploit environmental features for competitive advantage. The feedback loop ensures that regardless of skill level, the environment contains appropriately challenging opponents.
+
+\section{Industry Applications and Practical Implementations}
+
+\subsection{Cloud Computing and Network Resource Management}
+
+\textcite{belgacem_intelligent_2022} developed the Intelligent Multi-Agent Reinforcement Learning Model (IMARM) for cloud resource allocation, where virtual machines compete for computational resources while optimizing energy consumption and fault tolerance. The multi-agent approach enables dynamic resource allocation responding to changing consumer demands, with Q-learning policies guiding virtual machines to optimal states based on current environmental conditions. Competitive elements arise from finite computational resources and the need to balance multiple objectives including energy efficiency, load balancing, and quality of service.
+
+Recent work in 6G wireless networks~\autocite{zhang_multi-agent_2025} employs MARL for dynamic spectrum allocation and network selection, where edge nodes compete for radio access technologies and bandwidth resources. The multi-agent framework addresses natural network decentralization while enabling intelligent coordination. Key competitive elements include spectrum competition among multiple nodes for limited frequency bands, quality of service optimization balancing individual performance with network-wide efficiency, and energy management optimizing battery lifetime while maintaining service quality.
+
+\subsection{Financial Markets and Resource Competition}
+
+Multi-agent systems in financial markets represent natural competitive resource environments where trading agents compete for profitable opportunities in markets with limited liquidity~\autocite{shavandi_multi-agent_2022}. Recent developments employ MARL for algorithmic trading where agents learn to adapt to market conditions and competitor strategies, portfolio optimization involving dynamic capital resource allocation across multiple assets, and risk management balancing individual returns with systemic risk considerations. The competitive nature arises from zero-sum trading aspects where one agent's profit often corresponds to another's loss, combined with finite liquidity available at any price level.
+
+In competitive resource environments, communication presents challenges where agents may benefit from coordination to avoid wasteful conflicts while maintaining competitive advantages. Recent work explores learned communication protocols balancing information sharing with competitive considerations~\autocite{foerster_learning_2016}, strategic information sharing maximizing individual utility while enabling beneficial coordination~\autocite{eccles_biases_2019}, and deceptive communication where agents learn to provide misleading information for competitive advantages~\autocite{cao_emergent_2018}.
+
+\section{Current Challenges and Future Research Directions}
+
+\subsection{Scalability and Robustness}
+
+Current MARL approaches face significant scalability challenges as competing agent numbers increase, with joint action spaces growing exponentially and centralized training becoming computationally prohibitive. Research directions include mean field approaches approximating large-scale interactions through average effects, graph neural networks leveraging structural relationships for efficient computation, and hierarchical methods decomposing large-scale problems into manageable sub-problems.
+
+Competitive environments pose unique robustness challenges as adversarial interactions can exploit learned vulnerabilities. Current research focuses on population-based training maintaining diverse agent populations for improved robustness, adversarial training explicitly targeting worst-case opponents, and domain randomization improving generalization across varied competitive scenarios.
+
+\subsection{Theoretical Foundations and Evaluation}
+
+The theoretical analysis of competitive resource allocation builds on game-theoretic foundations, particularly Nash equilibria existence and computation in multi-agent settings. However, traditional equilibrium concepts often fail to capture dynamic learning in resource-constrained environments. Recent theoretical work explores correlated equilibria as more robust solution concepts for multi-agent learning, no-regret learning algorithms with theoretical guarantees in competitive settings, and opponent modeling theoretical frameworks for learning about and adapting to competitor strategies.
+
+Independent learning in competitive environments typically lacks convergence guarantees due to non-stationarity. Research addresses this through multi-timescale learning using different learning rates to stabilize competitive dynamics, best response dynamics theoretical analysis of agent response patterns, and regret minimization algorithms minimizing worst-case performance against adaptive opponents.
+
+The competitive MARL community lacks standardized benchmarks that capture the full complexity of resource competition. Recent efforts include PettingZoo environments providing standardized multi-agent environments with competitive scenarios, Melting Pot as DeepMind's evaluation suite for social interaction including resource competition, and JaxMARL offering high-performance implementations enabling large-scale experimentation.
+
+\section{Conclusion}
+
+Multi-agent reinforcement learning in competitive resource environments has evolved from foundational frameworks like MADDPG to sophisticated applications across industries including cloud computing, wireless networks, and financial markets. The field has demonstrated that resource scarcity fundamentally shapes emergent behaviors, leading to complex strategic interactions extending far beyond simple competition.
+
+Key contributions include establishing sequential social dilemmas as a paradigm for understanding temporal resource competition, demonstrating emergent complexity through competitive pressure, and developing scalable algorithms for real-world resource allocation problems. Current challenges focus on scalability, robustness, and theoretical understanding of learning dynamics in competitive settings.
+
+Future research directions emphasize the development of more sophisticated evaluation frameworks, improved theoretical guarantees for learning in competitive environments, and the exploration of hybrid cooperative-competitive scenarios that more accurately reflect real-world resource allocation challenges. The integration of large language models and foundation model approaches presents new opportunities for developing more capable and generalizable competitive agents. The field's evolution toward practical deployment demonstrates the maturity of competitive MARL as a technology for addressing real-world resource allocation challenges, while continuing to provide insights into the fundamental nature of multi-agent learning and strategic interaction.
