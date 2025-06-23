@@ -1,10 +1,11 @@
-import matplotlib.pyplot as plt
-import matplotlib.animation as animation
-import numpy as np
 import glob
-import os
-from PIL import Image
 import io
+import os
+
+import matplotlib.animation as animation
+import matplotlib.pyplot as plt
+import numpy as np
+from PIL import Image
 
 
 def create_training_history_gif():
@@ -138,7 +139,14 @@ def create_training_history_gif():
     frames = min(60, max_len)
     skip_frames = max(1, max_len // frames)
     gif_filename = "training_history_animation.gif"
-    anim = animation.FuncAnimation(fig, animate, frames=range(0, max_len, skip_frames), interval=170, blit=False, repeat=True)
+    anim = animation.FuncAnimation(
+        fig,
+        animate,
+        frames=range(0, max_len, skip_frames),
+        interval=170,
+        blit=False,
+        repeat=False,
+    )
     
     try:
         anim.save(gif_filename, writer='pillow', fps=6, dpi=100)
@@ -156,6 +164,8 @@ def create_training_history_gif():
             frames_list[0].save(gif_filename, save_all=True, append_images=frames_list[1:], duration=200, loop=0)
     
     plt.tight_layout()
+    plt.savefig("latex/imgs/training_history.svg")
+    animate(frames)
     plt.show()
     return gif_filename
 
@@ -178,7 +188,9 @@ def create_training_dashboard_gif():
 
     if event_files:
         try:
-            from tensorboard.backend.event_processing.event_accumulator import EventAccumulator
+            from tensorboard.backend.event_processing.event_accumulator import (
+                EventAccumulator,
+            )
             latest_file = max(event_files, key=os.path.getctime)
             ea = EventAccumulator(latest_file)
             ea.Reload()
@@ -219,9 +231,10 @@ def create_training_dashboard_gif():
     colors = ['salmon', 'blue', 'purple']
     window_size = 10
 
-    fig, axes = plt.subplots(2, 2, figsize=(14, 8))
+    fig, axes = plt.subplots(2, 2, figsize=(16, 8))
     ax_reward, ax_agents = axes[0, 0], axes[0, 1]
     ax_value, ax_coord = axes[1, 0], axes[1, 1]
+    plt.tight_layout(rect=[0, 0, 1, 0.96], pad=3.0, w_pad=2.0, h_pad=3.0)
     total_frames = min(len(all_data['timesteps']), 50)
     frame_skip = max(1, len(all_data['timesteps']) // total_frames)
     
@@ -304,6 +317,10 @@ def create_training_dashboard_gif():
 
         fig.suptitle(f'Timestep: {t:,}/{max(all_data["timesteps"]):,} | Progress: {progress*100:.1f}%', fontsize=14, fontweight='bold')
 
-    anim = animation.FuncAnimation(fig, animate, frames=total_frames, interval=200, repeat=True)
+    anim = animation.FuncAnimation(
+        fig, animate, frames=total_frames, interval=200, repeat=False
+    )
     anim.save("training_dashboard_with_coord_ma.gif", writer='pillow', fps=4, dpi=100)
+    plt.savefig("latex/imgs/dashboard.svg")
+    animate(total_frames)
     plt.show()
