@@ -1,5 +1,37 @@
 \appendix
 
-\section{Appendix}
+\section{Appendix}\label{app}
 
+To provide empirical context for our literature review, we implemented a multi-agent coordination experiment using Proximal Policy Optimization (PPO) in the Simple Spread environment from the Multi-Agent Particle Environment (MPE) suite. This environment requires multiple agents to coordinate their movements to cover distinct landmarks without collisions, representing a fundamental resource allocation challenge where spatial positions serve as contested resources.
 
+\subsection{Simple Spread Environment}
+
+The Simple Spread environment instantiates key challenges in competitive multi-agent learning. Three agents must simultaneously learn to occupy different landmarks while avoiding collisions with each other. Each agent observes its own position, velocity, and relative positions to landmarks and other agents. The reward structure encourages agents to cover landmarks while penalizing collisions, creating an implicit resource competition where optimal positioning requires coordination rather than pure competition.
+
+This task exemplifies the core challenges addressed in our literature review: agents must solve credit assignment problems (determining which agent should target which landmark), handle non-stationarity (as other agents' policies evolve during training), and develop coordination strategies that emerge from individual learning processes.
+
+\subsection{PPO Implementation}
+
+Our implementation follows the centralized training with decentralized execution paradigm, where agents share a critic network during training but execute policies independently. We track key metrics including episode rewards, episode lengths, value function losses, and policy gradient losses to analyze learning dynamics and convergence properties.
+
+The experiment demonstrates empirically how multi-agent environments create natural curricula—as agents improve, the coordination challenge increases correspondingly. This observation directly motivates the theoretical frameworks examined in our literature review, particularly regarding emergent complexity in competitive resource environments and the challenges of achieving stable learning in non-stationary multi-agent settings.
+
+\subsection{Connection to Literature Review}
+
+This practical implementation grounds our literature review in concrete multi-agent learning challenges. The Simple Spread task encapsulates fundamental themes explored in the surveyed literature: resource competition (spatial positions), coordination under partial observability, and the emergence of complex behaviors from simple individual policies. The empirical training dynamics observed in our experiment—including convergence patterns and the emergence of coordination—provide a tangible context for understanding the theoretical contributions and algorithmic advances discussed in the literature review.
+
+The experiment's training results (\figureref{fig:training_history} and \figureref{fig:training_dashboard}) illustrate the learning curves and coordination development that motivate the need for sophisticated multi-agent algorithms, directly connecting our practical experience to the surveyed theoretical advances in competitive multi-agent reinforcement learning.
+
+\begin{figure}[h]
+    \centering
+    \includesvg[width=0.9\textwidth]{latex/imgs/training_history.svg}
+    \caption{PPO training metrics on Simple Spread environment. Clockwise from top-left: episode rewards, episode lengths, policy losses, and value function losses over 30k timesteps.}
+    \label{fig:training_history}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includesvg[width=0.9\textwidth]{latex/imgs/dashboard.svg}
+    \caption{Multi-agent coordination dashboard. Clockwise from top-left: showing reward progression, agent behaviors, value loss, and coordination score during PPO training.}
+    \label{fig:training_dashboard}
+\end{figure}
