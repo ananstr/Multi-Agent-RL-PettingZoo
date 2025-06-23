@@ -88,9 +88,11 @@
 \usepackage[font=small,labelfont=bf]{caption}
 \usepackage[
     backend=biber, 
-    style=authoryear,
-    hyperref=true
+    style=apa,
+    hyperref=true,
     ]{biblatex}
+\addbibresource{latex/references.bib}
+\usepackage{csquotes}
 % Configure cite to show Author (Year)
 \DeclareCiteCommand{\cite}
   {\usebibmacro{prenote}}
@@ -104,9 +106,6 @@
 \DeclareNameAlias{labelname}{family-given}
 \renewcommand*{\nameyeardelim}{\addcomma\space}
 \AtEveryCitekey{\ifciteseen{}{\defcounter{maxnames}{1}}}
-\usepackage{csquotes}
-%\usepackage{biblatex}
-\addbibresource{LaTex/chapters/references.bib}
 %\usepackage[all]{hypcap} %Positioning of linked objects after jump
 \setlength{\parskip}{0.3\baselineskip} % Adjust spacing between paragraphs
 

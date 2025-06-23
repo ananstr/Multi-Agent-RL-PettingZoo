@@ -9,7 +9,7 @@
 	\centering
 	\includesvg[width=0.75\textwidth]{latex/imgs/BSE Barcelona Graduate School of Economics.svg}\par\vspace{0.75cm}
 	{\huge\bfseries Final Project\par}
-    {\large\bfseries \cl - DSDM -~\gr\par}
+    {\large\bfseries \cl - DSDM\par}
 	\vspace{0.25cm}
     \noindent\rule{\textwidth}{1pt}
     {\Large Anastasia Chernavskaia\par}
@@ -17,16 +17,20 @@
     {\Large Nicolas Rauth\par}
     \noindent\rule{\textwidth}{1pt}
 	\vfill
-    \tableofcontents
+    \begin{abstract}
+        Multi-agent reinforcement learning in competitive resource environments represents a critical domain where autonomous agents must learn optimal strategies while competing for limited resources. This literature review examines recent developments in competitive multi-agent systems, with particular emphasis on resource allocation scenarios. We survey foundational work including OpenAI's MADDPG framework, sequential social dilemmas, emergent complexity through competition, and practical applications across industries. The review identifies key algorithmic approaches, addresses fundamental challenges, including non-stationarity and credit assignment in competitive settings, and highlights current research directions toward more robust and scalable competitive multi-agent systems.
+    \end{abstract}
     \vfill
     % Bottom of the page
 	{\large \today\par}
 \end{titlepage}
 
 % Contents
-\include*{latex/chapters/partA}
-\include*{latex/chapters/partB}
-\include*{latex/chapters/partC}
+\tableofcontents
+\newpage
+\include*{latex/chapters/content}
+
+\printbibliography
 
 \newpage
 \include{latex/appendix}
