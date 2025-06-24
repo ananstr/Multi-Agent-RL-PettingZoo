@@ -136,18 +136,12 @@ def create_training_history_gif():
         fig.suptitle(f'MARL Training Progress - PPO on Simple Spread Environment\n{progress_text}', fontsize=16, fontweight='bold')
         return line1, line2, line3, line4
     
+    gif_filename = os.path.join('figures', 'training_history_animation.gif')
+
     frames = min(60, max_len)
     skip_frames = max(1, max_len // frames)
-    gif_filename = "training_history_animation.gif"
-    anim = animation.FuncAnimation(
-        fig,
-        animate,
-        frames=range(0, max_len, skip_frames),
-        interval=170,
-        blit=False,
-        repeat=False,
-    )
-    
+    anim = animation.FuncAnimation(fig, animate, frames=range(0, max_len, skip_frames), interval=170, blit=False, repeat=True)
+
     try:
         anim.save(gif_filename, writer='pillow', fps=6, dpi=100)
     except Exception:
@@ -317,10 +311,8 @@ def create_training_dashboard_gif():
 
         fig.suptitle(f'Timestep: {t:,}/{max(all_data["timesteps"]):,} | Progress: {progress*100:.1f}%', fontsize=14, fontweight='bold')
 
-    anim = animation.FuncAnimation(
-        fig, animate, frames=total_frames, interval=200, repeat=False
-    )
-    anim.save("training_dashboard_with_coord_ma.gif", writer='pillow', fps=4, dpi=100)
-    plt.savefig("latex/imgs/dashboard.svg")
-    animate(total_frames)
+    gif_filename = os.path.join('figures', 'training_dashboard_with_coord_ma.gif')
+
+    anim = animation.FuncAnimation(fig, animate, frames=total_frames, interval=200, repeat=True)
+    anim.save(gif_filename, writer='pillow', fps=4, dpi=100)
     plt.show()
