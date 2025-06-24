@@ -17,7 +17,7 @@ The algorithm extends single-agent DDPG to multi-agent settings through a key in
     \nabla_{\theta_i} J(\mu_i) = \mathbb{E}[\nabla_{\theta_i} \mu_i(o_i) \nabla_{a_i} Q_i^\mu(x, a_1, \ldots, a_N)|_{a_i=\mu_i(o_i)}]
 \end{equation}
 
-This approach demonstrates superior performance compared to independent learning approaches in environments featuring resource competition, such as the "simple tag" scenario, where agents compete to reach specific locations while avoiding adversaries (cf. our replication here). The OpenAI experiments revealed critical insights about how resource availability affects agent behavior and learning dynamics, establishing that multi-agent environments possess inherent curriculum properties where increasing agent capabilities create correspondingly more challenging environments~\autocite{lowe_learning_2017}.
+This approach demonstrates superior performance compared to independent learning approaches in environments featuring resource competition, such as the "simple tag" scenario, where agents compete to reach specific locations while avoiding adversaries (cf. our implementation in \ref{app}). The OpenAI experiments revealed critical insights about how resource availability affects agent behavior and learning dynamics, establishing that multi-agent environments possess inherent curriculum properties where increasing agent capabilities create correspondingly more challenging environments~\autocite{lowe_learning_2017}.
 
 \subsection{Value Decomposition and Policy Gradient Methods}
 
