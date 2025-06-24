@@ -27,6 +27,7 @@ dependencies = [
     "tensorboard>=2.19.0",
     "nbformat>=5.10.4",
     "stable-baselines3>=2.6.0",
+    "imageio>=2.37.0",
 ]
 
 [tool.uv]
