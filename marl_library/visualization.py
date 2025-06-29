@@ -139,60 +139,36 @@ def create_training_history_gif():
     frames = min(60, max_len)
     skip_frames = max(1, max_len // frames)
     gif_filename = "training_history_animation.gif"
-
-    # Create frames list for animation
-    frame_list = list(range(0, max_len, skip_frames))
-
-    # Create animation
     anim = animation.FuncAnimation(
         fig,
         animate,
-        frames=frame_list,
+        frames=range(0, max_len, skip_frames),
         interval=170,
         blit=False,
         repeat=False,
     )
-
-    # Save as GIF
+    
     try:
-        anim.save(gif_filename, writer="pillow", fps=6, dpi=100)
+        anim.save(gif_filename, writer='pillow', fps=6, dpi=100)
     except Exception:
         frames_list = []
-        for frame in frame_list:
+        for frame in range(0, max_len, skip_frames):
             animate(frame)
             buf = io.BytesIO()
-            plt.savefig(buf, format="png", dpi=100, bbox_inches="tight")
+            plt.savefig(buf, format='png', dpi=100, bbox_inches='tight')
             buf.seek(0)
             img = Image.open(buf)
             frames_list.append(img)
             buf.close()
         if frames_list:
-            frames_list[0].save(
-                gif_filename,
-                save_all=True,
-                append_images=frames_list[1:],
-                duration=200,
-                loop=0,
-            )
-
-    # # NEW: Save individual PNG frames
-    # print("Saving individual PNG frames...")
-    # os.makedirs("frames/training_history", exist_ok=True)
-    #
-    # for i, frame in enumerate(frame_list):
-    #     animate(frame)  # Set up the plot for this frame
-    #     frame_filename = f"frames/training_history/frame_{i:04d}.png"
-    #     plt.savefig(frame_filename, dpi=150, bbox_inches='tight', facecolor='white')
-    #     if i % 10 == 0:  # Progress indicator
-    #         print(f"Saved frame {i+1}/{len(frame_list)}")
-    #
-    # print(f"Saved {len(frame_list)} PNG frames to frames/training_history/")
-
+            frames_list[0].save(gif_filename, save_all=True, append_images=frames_list[1:], duration=200, loop=0)
+    
     plt.tight_layout()
     plt.savefig("latex/imgs/training_history.svg")
-    animate(len(frame_list) - 1)  # Show final frame
+    animate(frames)
     plt.show()
     return gif_filename
+
 
 
 def create_training_dashboard_gif():
@@ -341,25 +317,10 @@ def create_training_dashboard_gif():
 
         fig.suptitle(f'Timestep: {t:,}/{max(all_data["timesteps"]):,} | Progress: {progress*100:.1f}%', fontsize=14, fontweight='bold')
 
-    # Create animation
     anim = animation.FuncAnimation(
         fig, animate, frames=total_frames, interval=200, repeat=False
     )
     anim.save("training_dashboard_with_coord_ma.gif", writer='pillow', fps=4, dpi=100)
-
-    # NEW: Save individual PNG frames
-    print("Saving individual PNG frames for dashboard...")
-    os.makedirs("latex/imgs/dashboard", exist_ok=True)
-
-    for i in range(total_frames):
-        animate(i)  # Set up the plot for this frame
-        frame_filename = f"latex/imgs/dashboard/frame_{i}.png"
-        plt.savefig(frame_filename, dpi=150, bbox_inches="tight", facecolor="white")
-        # if i % 5 == 0:  # Progress indicator
-        #    print(f"Saved frame {i + 1}/{total_frames}")
-
-    print(f"Saved {total_frames} PNG frames to latex/imgs/dashboard/")
-
     plt.savefig("latex/imgs/dashboard.svg")
-    animate(total_frames - 1)  # Show final frame
+    animate(total_frames)
     plt.show()
