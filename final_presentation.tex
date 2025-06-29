@@ -34,8 +34,7 @@
 }
 
 % Outline
-\begin{frame}
-    \frametitle{Outline}
+\begin{frame}{Outline}
     \tableofcontents
 \end{frame}
 
@@ -212,7 +211,7 @@
             autoplay, % Starts playing immediately
             autoresume, % Resumes after page focus returns
             autopause, % Pauses when page loses focus
-            width=\linewidth]{20}{latex/imgs/oai-chaser/frame_}{150}{436}
+            width=\linewidth]{20}{latex/imgs/oai-chaser/frame_}{0}{436}
             \small{Red chasers vs. green runners}
         \end{column}
     \end{columns}
@@ -262,7 +261,7 @@
 \begin{frame}{Experimental Setup}
     
     \begin{columns}
-        \begin{column}{0.6\textwidth}
+        \begin{column}{0.5\textwidth}
             \textbf{Environment: Simple Spread}
             \begin{itemize}
                 \item 3 agents, 3 landmarks
@@ -279,7 +278,7 @@
                 \item Credit assignment challenge
             \end{itemize}
         \end{column}
-        \begin{column}{0.4\textwidth}
+        \begin{column}{0.5\textwidth}
             \textbf{Algorithm: PPO}
             \begin{itemize}
                 \item Centralized training
@@ -300,36 +299,43 @@
 \end{frame}
 
 \begin{frame}{Training Results: Learning Curves}
-    
-    \begin{center}
-        \includesvg[width=0.9\textwidth]{latex/imgs/training_history.svg}
-    \end{center}
-    
-    \textbf{Key Observations:}
-    \begin{itemize}
-        \item \textbf{Episode Rewards:} Convergence from -50 to +20 over 30k timesteps
-        \item \textbf{Episode Length:} Decreasing length indicates faster coordination
-        \item \textbf{Loss Convergence:} Both value and policy losses stabilize
-    \end{itemize}
+    \begin{columns}
+        \begin{column}{0.5\linewidth}
+            \begin{center}
+                \includesvg[width=1\textwidth]{latex/imgs/training_history.svg}
+            \end{center}
+        \end{column}
+        \begin{column}{0.5\linewidth}
+            \textbf{Key Observations:}
+            \begin{itemize}
+                \item \textbf{Episode Rewards:} Convergence from -50 to +20 over 30k timesteps
+                \item \textbf{Episode Length:} Decreasing length indicates faster coordination
+                \item \textbf{Loss Convergence:} Both value and policy losses stabilize
+            \end{itemize}    
+        \end{column}
+    \end{columns}
 \end{frame}
 
-\begin{frame}
-    \frametitle{Training Results: Coordination Dashboard}
-    
-    \begin{center}
-        \includesvg[width=0.9\textwidth]{latex/imgs/dashboard.svg}
-    \end{center}
-    
-    \textbf{Coordination Development:}
-    \begin{itemize}
-        \item \textbf{Reward progression:} Steady improvement in team performance
-        \item \textbf{Agent behaviors:} Individual policies learning complementary strategies
-        \item \textbf{Coordination score:} Emergent cooperation without explicit communication
-    \end{itemize}
+\begin{frame}{Training Results: Coordination Dashboard}
+    \begin{columns}
+        \begin{column}{0.5\linewidth}
+            \begin{center}
+                \includesvg[width=1\textwidth]{latex/imgs/dashboard.svg}
+            \end{center}
+        \end{column}
+        \begin{column}{0.5\linewidth}
+            \textbf{Coordination Development:}
+            \begin{itemize}
+                \item \textbf{Reward progression:} Steady improvement in team performance
+                \item \textbf{Agent behaviors:} Individual policies learning complementary strategies
+                \item \textbf{Coordination score:} Emergent cooperation without explicit communication
+            \end{itemize}
+        \end{column}
+    \end{columns}
 \end{frame}
 
 % ========== SECTION 5: INDUSTRY APPLICATIONS ==========
-\section{Industry Applications \& Real-World Impact}
+\section{Industry Applications}
 
 \begin{frame}{Cloud Computing \& Network Management}
     
@@ -423,10 +429,8 @@
 \section{Current Challenges \& Future Directions}
 
 \begin{frame}{Scalability \& Robustness Challenges}
-    
-    \begin{block}{The Scalability Problem}
-        Most MARL algorithms struggle with increasing number of agents
-    \end{block}
+    \textbf{The Scalability Problem}:
+    Most MARL algorithms struggle with increasing \# agent
     
     \vfill
     
@@ -509,22 +513,16 @@
             \begin{itemize}
                 \item Unified theoretical framework
                 \item Better evaluation metrics
-                \item Reproducible research practices
+                \item Reproducible research
             \end{itemize}
         \end{column}
     \end{columns}
 \end{frame}
 
-% ========== SECTION 7: KEY INSIGHTS ==========
-\section{Key Insights \& Takeaways}
+% ========== CONCLUSION ==========
+\section{Conclusion}
 
 \begin{frame}{Literature Review Insights}
-    
-    \begin{block}{Fundamental Insights}
-        Multi-agent environments fundamentally change the nature of learning
-    \end{block}
-    
-    \vfill
     
     \textbf{From Literature:}
     \begin{itemize}
@@ -540,61 +538,15 @@
     \textbf{From Implementation:}
     \begin{itemize}
         \item \textbf{PPO effectiveness:} Surprisingly strong in cooperative multi-agent settings
-        \item \textbf{Resource competition:} Emerges even in cooperative tasks (spatial positioning)
         \item \textbf{Coordination strategies:} Develop through individual learning processes
         \item \textbf{Training dynamics:} Convergence patterns reflect coordination development
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Practical Implications}
-    
-    \begin{columns}
-        \begin{column}{0.5\textwidth}
-            \textbf{For Practitioners:}
-            \begin{itemize}
-                \item Start with PPO for cooperative tasks
-                \item Use centralized training paradigm
-                \item Monitor coordination metrics
-                \item Consider value decomposition for credit assignment
-            \end{itemize}
-            
-            \vfill
-            \textbf{For Researchers:}
-            \begin{itemize}
-                \item Focus on scalability solutions
-                \item Develop better evaluation frameworks
-                \item Investigate theoretical foundations
-                \item Address robustness challenges
-            \end{itemize}
-        \end{column}
-        \begin{column}{0.5\textwidth}
-            \textbf{Industry Applications:}
-            \begin{itemize}
-                \item Cloud resource management
-                \item Financial trading systems
-                \item Autonomous vehicle coordination
-                \item Network optimization
-            \end{itemize}
-            
-            \vfill
-            \textbf{Research Priorities:}
-            \begin{itemize}
-                \item Scalable algorithms
-                \item Safety guarantees
-                \item Interpretable policies
-                \item Real-world deployment
-            \end{itemize}
-        \end{column}
-    \end{columns}
-\end{frame}
-
-% ========== CONCLUSION ==========
-\section{Conclusion}
-
 \begin{frame}{Conclusion: The Future of Multi-Agent RL}
     
     \begin{block}{Bottom Line}
-        MARL represents a paradigm shift toward more realistic, interactive AI systems
+        MARL represented a paradigm shift toward more realistic, interactive AI systems
     \end{block}
     
     \vfill
@@ -609,18 +561,8 @@
     
     \vfill
     
-    \textbf{The Path Forward:}
-    \begin{itemize}
-        \item Bridge theory-practice gap through rigorous evaluation
-        \item Develop scalable solutions for large-scale systems
-        \item Ensure safety and robustness for real-world deployment
-        \item Foster interdisciplinary collaboration (RL + game theory + distributed systems)
-    \end{itemize}
-    
-    \vfill
-    
     \begin{center}
-        \textbf{Multi-agent RL: Where competition meets cooperation, and intelligence emerges}
+        \textbf{Multi-agent RL: Where competition meets cooperation, and "intelligence" emerges}
     \end{center}
 \end{frame}
 
