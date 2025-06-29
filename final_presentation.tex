@@ -85,9 +85,9 @@
         \begin{column}{0.5\textwidth}
             \textbf{Implementation:}
             \begin{itemize}
-                \item Simple Spread environment
+                \item Simple Spread / Adversary environment
                 \item PPO algorithm
-                \item 3 agents coordinating
+                \item 3 agents coordinating / competing
                 \item Resource allocation challenge
             \end{itemize}
         \end{column}
@@ -150,7 +150,7 @@
             \textbf{QPLEX Extension:} \autocite{wang_qplex_2021}
             \begin{itemize}
                 \item Removes monotonicity constraint
-                \item Uses advantage decomposition
+                \item Uses advantage term
                 \item Better handles negative interactions
                 \item More flexible credit assignment
             \end{itemize}
@@ -329,6 +329,38 @@
                 \item \textbf{Reward progression:} Steady improvement in team performance
                 \item \textbf{Agent behaviors:} Individual policies learning complementary strategies
                 \item \textbf{Coordination score:} Emergent cooperation without explicit communication
+            \end{itemize}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Experimental Setup: Simple Adversary}
+    
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \textbf{Environment: Simple Adversary}
+            \begin{itemize}
+                \item 2 good agents, 1 adversary
+                \item Goal for the good agents: Reach landmarks, avoid capture
+                \item Goal for the adversary: Capture good agents
+                \item Zero-sum competition
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \textbf{Good Agents Learn:}
+            \begin{itemize}
+                \item Sophisticated movement to avoid capture
+                \item Strategic target selection  
+                \item Time movements to reduce exposure
+            \end{itemize}
+            
+            \vfill
+            \textbf{Adversary Agents Learn:}
+            \begin{itemize}
+                \item Predicting good agent movements
+                \item Coordinated chasing behaviors
+                \item Driving agents toward capture zones
+                \item Preventing access to landmarks
             \end{itemize}
         \end{column}
     \end{columns}
