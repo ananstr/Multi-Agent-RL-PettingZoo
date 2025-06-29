@@ -1,50 +1,576 @@
-\documentclass{beamer}
+\documentclass[aspectratio=169]{beamer}
 \usepackage[style=apa, backend=biber]{biblatex}
 \addbibresource{latex/references.bib}
-\AtBeginBibliography{\scriptsize} % Reduce size of the bibliography to use less pages
+\AtBeginBibliography{\scriptsize}
 \usepackage{svg}
 \usepackage{booktabs}
-\usepackage{hwemoji}
-\usepackage{graphicx} % Load graphics
-\usepackage{booktabs} % Nice tables
-\usepackage{dcolumn} % Booktabs column spacing
-\usepackage{threeparttable} % Align column caption, table, and notes
-\usepackage{adjustbox} % Shrink stuff
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{animate} % Animate GIFs
 \usetheme{metropolis}
-\title{Resource Competition in Multi-Agent Reinforcement Learning:}
-\subtitle{A Literature Review}
-\date{\centering\today}
-\author{\centering Anastasia Chernavskaia, Moritz Peist, Nicolas Rauth}
-\institute{\centering\includesvg[width=4cm]{latex/imgs/BSE Barcelona Graduate School of Economics.svg}}
+
+\title{Resource Competition in Multi-Agent Reinforcement Learning (MARL)}
+\subtitle{A Literature Review \& Implementation}
+\date{\today}
+\author{Anastasia Chernavskaia, Moritz Peist, Nicolas Rauth}
+\institute{\includesvg[width=4cm]{latex/imgs/BSE Barcelona Graduate School of Economics.svg}}
+
 \begin{document}
 
-    \begin{frame}{}
-        \titlepage
-    \end{frame}
-    % Add BSE Logo
-    \setbeamertemplate{frametitle}
-    {
-        \nointerlineskip
-        \begin{beamercolorbox}[sep=0.3cm,wd=\paperwidth]{frametitle}
-            \strut\insertframetitle\strut
-            \hfill
-            \raisebox{-0.8mm}{\includesvg[width=1cm]{latex/imgs/BSE Barcelona Graduate School of Economics.svg}}
-        \end{beamercolorbox}
-    }
+% Title slide
+\begin{frame}{}
+    \titlepage
+\end{frame}
 
-    \begin{frame}
-        \frametitle{Outline}
-        \tableofcontents
-    \end{frame}
+% Logo on all slides
+\setbeamertemplate{frametitle}
+{
+    \nointerlineskip
+    \begin{beamercolorbox}[sep=0.3cm,wd=\paperwidth]{frametitle}
+        \strut\insertframetitle\strut
+        \hfill
+        \raisebox{-0.8mm}{\includesvg[width=1cm]{latex/imgs/BSE Barcelona Graduate School of Economics.svg}}
+    \end{beamercolorbox}
+}
 
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    
+% Outline
+\begin{frame}{Outline}
+    \tableofcontents
+\end{frame}
 
-  
-    \section{References}
+% ========== SECTION 1: INTRODUCTION ==========
+\section{Introduction: Why Multi-Agent RL Matters}
+
+\begin{frame}{The Multi-Agent Challenge}
     
-    \begin{frame}[allowframebreaks]{References}
-        \printbibliography[heading=none]
-    \end{frame}
+    \begin{columns}
+        \begin{column}{0.45\textwidth}
+            \textbf{Traditional RL}: One agent learns in a static environment \\
+            \textbf{Multi-Agent RL}: Multiple agents learning simultaneously \\
+            \textbf{Key Challenges:}
+            \begin{itemize}
+                \item Non-stationarity (environment changes as agents learn)
+                \item Credit assignment (who contributed to the outcome?)
+                \item Competition vs cooperation
+                \item Scalability with increasing agents
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.55\textwidth}
+            \centering
+            %\includegraphics[width=\textwidth]{training_dashboard_with_coord_ma.gif}
+            \animategraphics[controls, 
+            autoplay, % Starts playing immediately
+            autoresume, % Resumes after page focus returns
+            autopause, % Pauses when page loses focus
+            width=\linewidth]{4}{latex/imgs/dashboard/frame_}{0}{49}
+            \small{Multi-agent coordination in action}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Research Focus \& Approach}
+    \textbf{Project Approach: Literature Review} + \textbf{Code Replication} \\
+    Focus on resource competition and cooperation dynamics
+    \vfill
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \textbf{Literature Survey:}
+            \begin{itemize}
+                \item MADDPG framework
+                \item Value decomposition methods  
+                \item Sequential social dilemmas
+                \item Industry applications
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \textbf{Implementation:}
+            \begin{itemize}
+                \item Simple Spread environment
+                \item PPO algorithm
+                \item 3 agents coordinating
+                \item Resource allocation challenge
+            \end{itemize}
+        \end{column}
+    \end{columns}
+    \vfill
+    \textbf{Key Reference:} OpenAI's "Learning to cooperate, compete, and communicate" \autocite{lowe_learning_2017}
+\end{frame}
+
+% ========== SECTION 2: FOUNDATIONAL FRAMEWORKS ==========
+\section{Foundational Frameworks}
+
+\begin{frame}{The MADDPG Revolution}
     
+    \begin{block}{Core Innovation: Centralized Training, Decentralized Execution}
+        Train with global information, execute with local observations only
+    \end{block}
+    \vfill
+    \begin{columns}
+        \begin{column}{0.6\textwidth}
+            \textbf{MADDPG Architecture:}
+            \begin{itemize}
+                \item Each agent: own actor $\mu_i(o_i|\theta_i)$
+                \item Centralized critic: $Q_i^\mu(x, a_1, \ldots, a_N)$
+                \item Access to all agents' actions during training
+                \item Solves the non-stationarity problem
+            \end{itemize}
+            \vfill
+            \textbf{Key Insight:} Environment becomes stationary from critic's perspective \autocite{lowe_multi-agent_2017}
+        \end{column}
+        \begin{column}{0.4\textwidth}
+            \centering
+            %\includegraphics[width=\textwidth]{openai_maddpg_diagram.png}
+            \animategraphics[controls, 
+            autoplay, % Starts playing immediately
+            autoresume, % Resumes after page focus returns
+            autopause, % Pauses when page loses focus
+            width=\linewidth]{20}{latex/imgs/oai-diagram/nipsdiagram_2-}{0}{168}
+            \small{MADDPG training architecture}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Value Decomposition Methods}
+    
+    \textbf{Problem:} How do we assign credit in team rewards?
+    
+    \vfill
+    
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \textbf{QMIX Approach:} \autocite{rashid_monotonic_2020}
+            \begin{itemize}
+                \item Individual Q-values: $Q_i(o_i, a_i)$
+                \item Team Q-value: $Q_{tot}(s, \mathbf{a})$
+                \item Monotonic mixing: $\frac{\partial Q_{tot}}{\partial Q_i} \geq 0$
+                \item Ensures optimal joint action
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \textbf{QPLEX Extension:} \autocite{wang_qplex_2021}
+            \begin{itemize}
+                \item Removes monotonicity constraint
+                \item Uses advantage decomposition
+                \item Better handles negative interactions
+                \item More flexible credit assignment
+            \end{itemize}
+        \end{column}
+    \end{columns}
+    
+    \vfill
+    \begin{alertblock}{Key Insight}
+        Value decomposition enables scalable credit assignment while maintaining decentralized execution
+    \end{alertblock}
+\end{frame}
+
+\begin{frame}{COMA: Counterfactual Multi-Agent Policy Gradients}
+    \textbf{Innovation:} Actor-critic with counterfactual baselines \autocite{foerster_counterfactual_2018}
+    \vfill
+    \begin{block}{Counterfactual Advantage}
+        $$A_i(s, \mathbf{a}) = Q(s, \mathbf{a}) - \sum_{a'_i} \pi_i(a'_i|o_i) Q(s, (\mathbf{a}_{-i}, a'_i))$$
+    \end{block}
+    \vfill
+    \textbf{What this means:}
+    \begin{itemize}
+        \item Compare actual action vs. average over all possible actions
+        \item Isolates agent $i$'s contribution to team performance  
+        \item Efficient computation in single forward pass
+        \item Addresses multi-agent credit assignment problem
+    \end{itemize}
+    \vfill
+    \textbf{Applications:} Particularly effective in StarCraft unit micromanagement
+\end{frame}
+
+% ========== SECTION 3: EMERGENT COMPLEXITY ==========
+\section{Emergent Complexity \& Competition}
+
+\begin{frame}{Sequential Social Dilemmas}
+    
+    \textbf{Core Concept:} Multi-agent environments with temporal resource competition \autocite{leibo_multi-agent_2017}
+    
+    \begin{columns}
+        \begin{column}{0.6\textwidth}
+            \textbf{Key Properties:}
+            \begin{itemize}
+                \item \textbf{Social dilemma:} Individual vs. collective rationality
+                \item \textbf{Temporal:} Actions affect future opportunities
+                \item \textbf{Resource scarcity:} Limited resources create competition
+                \item \textbf{Policy interdependence:} Agents' policies affect each other
+            \end{itemize}
+            
+            \textbf{Examples:}
+            \begin{itemize}
+                \item Commons Harvest (resource depletion)
+                \item Traffic coordination
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.4\textwidth}
+            \centering
+            % \includegraphics[width=\textwidth]{openai_chaser_runner.png}
+            \animategraphics[controls, 
+            autoplay, % Starts playing immediately
+            autoresume, % Resumes after page focus returns
+            autopause, % Pauses when page loses focus
+            width=\linewidth]{20}{latex/imgs/oai-chaser/frame_}{0}{436}
+            \small{Red chasers vs. green runners}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Natural Curricula \& Autocurricula}
+    
+    \begin{block}{Key Insight from OpenAI Research}
+        "Multi-agent environments create natural curricula where difficulty scales with competitor skill"
+    \end{block}
+    
+    \vfill
+    
+    \textbf{Autocurriculum Properties:}
+    \begin{itemize}
+        \item \textbf{No stable equilibrium:} Continuous pressure for improvement
+        \item \textbf{Automatic difficulty scaling:} Environment becomes harder as agents improve  
+        \item \textbf{Emergent complexity:} Simple rules → complex behaviors \autocite{bansal_emergent_2018}
+        \item \textbf{Robust strategies:} Agents must generalize across opponent types
+    \end{itemize}
+    
+    \vfill
+    
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \textbf{Benefits:}
+            \begin{itemize}
+                \item Self-generated training data
+                \item Avoids over-specialization
+                \item Promotes strategic diversity
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \textbf{Challenges:}
+            \begin{itemize}
+                \item Training instability
+                \item Evaluation difficulties
+                \item Strategy cycling
+            \end{itemize}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% ========== SECTION 4: IMPLEMENTATION ==========
+\section{Our Implementation: PPO in Simple Spread}
+
+\begin{frame}{Experimental Setup}
+    
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \textbf{Environment: Simple Spread}
+            \begin{itemize}
+                \item 3 agents, 3 landmarks
+                \item Goal: Cover all landmarks
+                \item Avoid collisions
+                \item Partial observability
+            \end{itemize}
+            
+            \vfill
+            \textbf{Resource Competition:}
+            \begin{itemize}
+                \item Spatial positions as contested resources
+                \item Coordination vs. competition trade-off
+                \item Credit assignment challenge
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \textbf{Algorithm: PPO}
+            \begin{itemize}
+                \item Centralized training
+                \item Decentralized execution  
+                \item Shared critic network
+                \item Individual policy networks
+            \end{itemize}
+            
+            \vfill
+            \textbf{Why PPO?}
+            \begin{itemize}
+                \item Surprisingly effective in cooperative MARL \autocite{yu_surprising_2022}
+                \item Stable training
+                \item Minimal hyperparameter tuning
+            \end{itemize}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Training Results: Learning Curves}
+    \begin{columns}
+        \begin{column}{0.5\linewidth}
+            \begin{center}
+                \includesvg[width=1\textwidth]{latex/imgs/training_history.svg}
+            \end{center}
+        \end{column}
+        \begin{column}{0.5\linewidth}
+            \textbf{Key Observations:}
+            \begin{itemize}
+                \item \textbf{Episode Rewards:} Convergence from -50 to +20 over 30k timesteps
+                \item \textbf{Episode Length:} Decreasing length indicates faster coordination
+                \item \textbf{Loss Convergence:} Both value and policy losses stabilize
+            \end{itemize}    
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Training Results: Coordination Dashboard}
+    \begin{columns}
+        \begin{column}{0.5\linewidth}
+            \begin{center}
+                \includesvg[width=1\textwidth]{latex/imgs/dashboard.svg}
+            \end{center}
+        \end{column}
+        \begin{column}{0.5\linewidth}
+            \textbf{Coordination Development:}
+            \begin{itemize}
+                \item \textbf{Reward progression:} Steady improvement in team performance
+                \item \textbf{Agent behaviors:} Individual policies learning complementary strategies
+                \item \textbf{Coordination score:} Emergent cooperation without explicit communication
+            \end{itemize}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% ========== SECTION 5: INDUSTRY APPLICATIONS ==========
+\section{Industry Applications}
+
+\begin{frame}{Cloud Computing \& Network Management}
+    
+    \begin{columns}
+        \begin{column}{0.6\textwidth}
+            \textbf{Resource Allocation Challenges:}
+            \begin{itemize}
+                \item CPU, memory, bandwidth allocation
+                \item Load balancing across servers
+                \item Network routing optimization
+                \item Energy efficiency goals
+            \end{itemize}
+            
+            \vfill
+            \textbf{MARL Applications:} \autocite{zhang_multi-agent_2025}
+            \begin{itemize}
+                \item Autonomous resource managers
+                \item Distributed decision making
+                \item Real-time adaptation
+                \item Scalable to large systems
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.4\textwidth}
+            \textbf{Benefits:}
+            \begin{itemize}
+                \item Reduced latency
+                \item Better resource utilization
+                \item Fault tolerance
+                \item Adaptive scaling
+            \end{itemize}
+            
+            \vfill
+            \textbf{Challenges:}
+            \begin{itemize}
+                \item High-dimensional state spaces
+                \item Safety constraints
+                \item Real-time requirements
+                \item Partial observability
+            \end{itemize}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Financial Markets \& Trading}
+    
+    \textbf{Multi-Agent Trading Systems:} \autocite{shavandi_multi-agent_2022}
+    
+    \vfill
+    
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \textbf{Applications:}
+            \begin{itemize}
+                \item Algorithmic trading strategies
+                \item Market making optimization
+                \item Portfolio management
+                \item Risk assessment systems
+            \end{itemize}
+            
+            \vfill
+            \textbf{Resource Competition:}
+            \begin{itemize}
+                \item Limited market liquidity
+                \item Information asymmetries
+                \item Execution timing
+                \item Capital allocation
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \textbf{MARL Advantages:}
+            \begin{itemize}
+                \item Adaptive to market regimes
+                \item Strategic interaction modeling
+                \item Emergent market behaviors
+                \item Robust to opponent strategies
+            \end{itemize}
+            
+            \vfill
+            \textbf{Considerations:}
+            \begin{itemize}
+                \item Regulatory constraints
+                \item Market impact
+                \item Systemic risk
+                \item Ethical concerns
+            \end{itemize}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% ========== SECTION 6: CHALLENGES ==========
+\section{Current Challenges \& Future Directions}
+
+\begin{frame}{Scalability \& Robustness Challenges}
+    \textbf{The Scalability Problem}:
+    Most MARL algorithms struggle with increasing \# agent
+    
+    \vfill
+    
+    \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \textbf{Technical Challenges:}
+            \begin{itemize}
+                \item Exponential action/state spaces
+                \item Communication overhead  
+                \item Training instability
+                \item Sample efficiency \autocite{liu_scaling_2024}
+            \end{itemize}
+            
+            \vfill
+            \textbf{Current Approaches:}
+            \begin{itemize}
+                \item Hierarchical decomposition
+                \item Graph neural networks
+                \item Attention mechanisms
+                \item Population-based training
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \textbf{Robustness Issues:}
+            \begin{itemize}
+                \item Overfitting to training opponents
+                \item Brittleness to environment changes
+                \item Strategy exploitation
+                \item Evaluation difficulties
+            \end{itemize}
+            
+            \vfill
+            \textbf{Research Directions:}
+            \begin{itemize}
+                \item Domain randomization
+                \item Meta-learning approaches
+                \item Diverse opponent training
+                \item Formal verification methods
+            \end{itemize}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Theoretical Foundations \& Evaluation}
+    
+    \textbf{Missing Theoretical Understanding:} \autocite{fish_algorithmic_2025}
+    
+    \vfill
+    
+    \begin{columns}
+        \begin{column}{0.6\textwidth}
+            \textbf{Theory Gaps:}
+            \begin{itemize}
+                \item Convergence guarantees in multi-agent settings
+                \item Sample complexity bounds
+                \item Equilibrium concepts
+                \item Optimality conditions
+            \end{itemize}
+            
+            \vfill
+            \textbf{Evaluation Challenges:}
+            \begin{itemize}
+                \item No standard benchmarks
+                \item Opponent selection bias
+                \item Metric interpretation
+                \item Reproducibility issues
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.4\textwidth}
+            \textbf{Emerging Solutions:}
+            \begin{itemize}
+                \item MALIB framework \autocite{zhou_malib_2023}
+                \item Standardized evaluation protocols
+                \item Game-theoretic analysis tools
+                \item Open-source benchmarks
+            \end{itemize}
+            
+            \vfill
+            \textbf{Future Needs:}
+            \begin{itemize}
+                \item Unified theoretical framework
+                \item Better evaluation metrics
+                \item Reproducible research
+            \end{itemize}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+% ========== CONCLUSION ==========
+\section{Conclusion}
+
+\begin{frame}{Literature Review Insights}
+    
+    \textbf{From Literature:}
+    \begin{itemize}
+        \item \textbf{Natural curricula:} Competition creates automatic difficulty scaling
+        \item \textbf{No stable equilibrium:} Continuous pressure for improvement
+        \item \textbf{Centralized critics:} Enable stable learning in non-stationary environments
+        \item \textbf{Value decomposition:} Solves credit assignment while maintaining decentralization
+        \item \textbf{Emergent complexity:} Simple individual policies → complex team behaviors
+    \end{itemize}
+    
+    \vfill
+    
+    \textbf{From Implementation:}
+    \begin{itemize}
+        \item \textbf{PPO effectiveness:} Surprisingly strong in cooperative multi-agent settings
+        \item \textbf{Coordination strategies:} Develop through individual learning processes
+        \item \textbf{Training dynamics:} Convergence patterns reflect coordination development
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Conclusion: The Future of Multi-Agent RL}
+    
+    \begin{block}{Bottom Line}
+        MARL represented a paradigm shift toward more realistic, interactive AI systems
+    \end{block}
+    
+    \vfill
+    
+    \textbf{What We've Learned:}
+    \begin{itemize}
+        \item Multi-agent environments create unique learning challenges and opportunities
+        \item Algorithmic innovations (MADDPG, QMIX, COMA) address core MARL problems
+        \item Simple algorithms (PPO) can be surprisingly effective with proper implementation
+        \item Real-world applications span critical infrastructure and economic systems
+    \end{itemize}
+    
+    \vfill
+    
+    \begin{center}
+        \textbf{Multi-agent RL: Where competition meets cooperation, and "intelligence" emerges}
+    \end{center}
+\end{frame}
+
+% ========== REFERENCES ==========
+\section{References}
+
+\begin{frame}[allowframebreaks]{References}
+    \printbibliography[heading=none]
+\end{frame}
+
 \end{document}
