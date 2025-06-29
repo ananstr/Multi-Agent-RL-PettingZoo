@@ -22,14 +22,14 @@ This practical implementation grounds our literature review in concrete multi-ag
 
 The experiment's training results (\figureref{fig:training_history} and \figureref{fig:training_dashboard}) illustrate the learning curves and coordination development that motivate the need for sophisticated multi-agent algorithms, directly connecting our practical experience to the surveyed theoretical advances in competitive multi-agent reinforcement learning.
 
-\begin{figure}[h]
+\begin{figure}[htpb]
     \centering
     \includesvg[width=0.9\textwidth]{latex/imgs/training_history.svg}
     \caption{PPO training metrics on Simple Spread environment. Clockwise from top-left: episode rewards, episode lengths, policy losses, and value function losses over 30k timesteps.}
     \label{fig:training_history}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[htpb]
     \centering
     \includesvg[width=0.9\textwidth]{latex/imgs/dashboard.svg}
     \caption{Multi-agent coordination dashboard. Clockwise from top-left: showing reward progression, agent behaviors, value loss, and coordination score during PPO training.}
