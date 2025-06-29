@@ -1,0 +1,50 @@
+\documentclass{beamer}
+\usepackage[style=apa, backend=biber]{biblatex}
+\addbibresource{latex/references.bib}
+\AtBeginBibliography{\scriptsize} % Reduce size of the bibliography to use less pages
+\usepackage{svg}
+\usepackage{booktabs}
+\usepackage{hwemoji}
+\usepackage{graphicx} % Load graphics
+\usepackage{booktabs} % Nice tables
+\usepackage{dcolumn} % Booktabs column spacing
+\usepackage{threeparttable} % Align column caption, table, and notes
+\usepackage{adjustbox} % Shrink stuff
+\usetheme{metropolis}
+\title{Resource Competition in Multi-Agent Reinforcement Learning:}
+\subtitle{A Literature Review}
+\date{\centering\today}
+\author{\centering Anastasia Chernavskaia, Moritz Peist, Nicolas Rauth}
+\institute{\centering\includesvg[width=4cm]{latex/imgs/BSE Barcelona Graduate School of Economics.svg}}
+\begin{document}
+
+    \begin{frame}{}
+        \titlepage
+    \end{frame}
+    % Add BSE Logo
+    \setbeamertemplate{frametitle}
+    {
+        \nointerlineskip
+        \begin{beamercolorbox}[sep=0.3cm,wd=\paperwidth]{frametitle}
+            \strut\insertframetitle\strut
+            \hfill
+            \raisebox{-0.8mm}{\includesvg[width=1cm]{latex/imgs/BSE Barcelona Graduate School of Economics.svg}}
+        \end{beamercolorbox}
+    }
+
+    \begin{frame}
+        \frametitle{Outline}
+        \tableofcontents
+    \end{frame}
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    
+
+  
+    \section{References}
+    
+    \begin{frame}[allowframebreaks]{References}
+        \printbibliography[heading=none]
+    \end{frame}
+    
+\end{document}
