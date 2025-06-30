@@ -27,14 +27,19 @@ This project investigates **Multi-Agent Reinforcement Learning (MARL)** with a f
 ## Structure
 
 ```
-├── latex/                      # Literature review document
-│   ├── main.tex               # Main LaTeX document
-│   ├── chapters/content.tex   # Literature review content
+├── latex/                    # Literature review document
+│   ├── main.tex              # Main LaTeX document
+│   ├── chapters/content.tex  # Literature review content
 │   ├── appendix.tex          # Implementation appendix
 │   └── references.bib        # Bibliography
-├── marl_library/              # Custom MARL utilities
+├── marl_library/             # Custom MARL utilities
 │   ├── __init__.py           # Library initialization
 │   └── visualization.py      # Training visualization tools
+├── MARL_adversary.ipynb      # Execution of PettingZoo Simple Spread game
+├── MARL_spread.ipynb         # Execution of PettingZoo Simple Adversary game
+├── Presentation_MARL.pdf     # Presentation slides
+├── Presentation_MARL.zip     # Zipped source folder with presentation
+├── Report_MARL.pdf           # Report about literature review and our PPO implementation
 ├── project.toml              # Project dependencies
 └── README.md                 # This file
 ```
@@ -51,10 +56,18 @@ This project investigates **Multi-Agent Reinforcement Learning (MARL)** with a f
 
 ### Implementation
 
+1) Coordination Challenge
 - **Environment**: Simple Spread (Multi-Agent Particle Environment)
 - **Algorithm**: Proximal Policy Optimization (PPO)
 - **Paradigm**: Centralized Training, Decentralized Execution
 - **Challenge**: Coordinate 3 agents to cover landmarks without collision
+
+2) Competition Challenge
+- **Environment**: Simple Adversary (Multi-Agent Particle Environment)
+- **Algorithm**: Proximal Policy Optimization (PPO)
+- **Paradigm**: Centralized Training, Decentralized Execution
+- **Challenge**: 2 good agents try to cover landmarks without being caught by the adversary
+                 1 adversary tries to catch the good agents, prevent them from reaching landmarks
 
 ## Key Insights
 
@@ -114,11 +127,13 @@ create_training_history_gif()
 
 ### Training Metrics
 
-The Simple Spread environment demonstrates key MARL challenges:
+The **Simple Spread** environment demonstrates key MARL challenges:
 
 - **Episode Rewards**: Convergence from -50 to +20 over 30k timesteps
 - **Coordination**: Emergent strategies for landmark coverage
 - **Resource Competition**: Implicit spatial resource allocation
+
+The **Simple Adversary** environment is more challenging because of conflicting tasks of agents and adversaries. Even in 500k steps the good agents were not able to learn to avoid the adversary. Even a complex CNN with 3 hidden layers and fine-tuned hyperparameters was unable to improve performance.
 
 ### Literature Findings
 
