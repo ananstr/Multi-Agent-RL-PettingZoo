@@ -37,7 +37,9 @@ This project investigates **Multi-Agent Reinforcement Learning (MARL)** with a f
 │   └── visualization.py      # Training visualization tools
 ├── MARL_adversary.ipynb      # Execution of PettingZoo Simple Spread game
 ├── MARL_spread.ipynb         # Execution of PettingZoo Simple Adversary game
+├── Presentation_MARL.pdf     # Presentation slides
 ├── Presentation_MARL.zip     # Zipped source folder with presentation
+├── Report_MARL.pdf           # Report about literature review and our PPO implementation
 ├── project.toml              # Project dependencies
 └── README.md                 # This file
 ```
